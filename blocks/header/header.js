@@ -163,4 +163,16 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  function handleHeaderScroll() {
+    if (window.scrollY > 0) {
+      block.classList.add('is-scrolled');
+    } else {
+      block.classList.remove('is-scrolled');
+    }
+  }
+
+  handleHeaderScroll();
+
+  window.addEventListener('scroll', handleHeaderScroll, { passive: true });
 }
