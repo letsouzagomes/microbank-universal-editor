@@ -142,40 +142,32 @@
     ]
   },
   {
-    "id": "business-cards",
+    "id": "business-card",
     "fields": [
       {
-        "component": "collection",
-        "name": "cards",
-        "label": "Cards",
-        "valueType": "object",
-        "minItems": 1,
-        "fields": [
-          {
-            "component": "media",
-            "name": "image",
-            "label": "Image",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "name": "title",
-            "label": "Title",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "name": "description",
-            "label": "Description",
-            "valueType": "string"
-          },
-          {
-            "component": "link",
-            "name": "link",
-            "label": "Link",
-            "valueType": "string"
-          }
-        ]
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "description",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "link",
+        "name": "link",
+        "label": "Link",
+        "valueType": "string"
       }
     ]
   },

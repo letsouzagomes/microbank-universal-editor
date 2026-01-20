@@ -21,6 +21,12 @@
     ]
   },
   {
+    "id": "business-cards",
+    "components": [
+      "business-card"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
