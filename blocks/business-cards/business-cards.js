@@ -1,11 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-function appendWithClass(parent, wrapper, className) {
-  wrapper.className = className;
-  parent.append(wrapper);
-}
-
 export default function decorate(block) {
   const ul = document.createElement('ul');
 
@@ -14,31 +9,31 @@ export default function decorate(block) {
     moveInstrumentation(row, li);
 
     const picture = row.querySelector('picture');
-    const titleWrapper = row.querySelector('.business-cards__title, div:nth-child(2)');
-    const descriptionWrapper = row.querySelector('.business-cards__description, div:nth-child(3)');
+    const title = row.querySelector('div:nth-of-type(2)');
+    const description = row.querySelector('div:nth-of-type(3)');
     const link = row.querySelector('a');
 
-    let contentRoot = li;
-
-    if (link) {
-      link.classList.add('business-cards__link');
-      li.append(link);
-      contentRoot = link;
-    }
+    if (!link) return;
+    link.textContent = '';
+    link.classList.remove('button');
+    link.classList.add('business-cards__link');
+    li.append(link);
 
     if (picture) {
-      const imageWrapper = document.createElement('div');
-      imageWrapper.className = 'business-cards__image';
-      imageWrapper.append(picture);
-      contentRoot.append(imageWrapper);
+      const imgWrap = document.createElement('div');
+      imgWrap.className = 'business-cards__image';
+      imgWrap.append(picture);
+      link.append(imgWrap);
     }
 
-    if (titleWrapper) {
-      appendWithClass(contentRoot, titleWrapper, 'business-cards__title');
+    if (title) {
+      title.className = 'business-cards__title';
+      link.append(title);
     }
 
-    if (descriptionWrapper) {
-      appendWithClass(contentRoot, descriptionWrapper, 'business-cards__description');
+    if (description) {
+      description.className = 'business-cards__description';
+      link.append(description);
     }
 
     ul.append(li);

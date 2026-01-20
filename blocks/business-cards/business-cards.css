@@ -1,34 +1,30 @@
-/* GRID */
-.business-cards > ul {
+.business-cards.block > ul {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 /* CARD */
-.business-cards > ul > li {
+.business-cards.block > ul > li {
   position: relative;
-  min-height: 420px;
-  border-radius: 16px;
+  height: 520px;
+  border-radius: 24px;
   overflow: hidden;
-  background-color: #000;
 }
 
-/* LINK WRAPPER */
-.business-cards__link {
-  position: relative;
+/* LINK ocupa tudo */
+.business-cards.block > ul > li > a.business-cards__link {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 100%;
-  height: 100%;
-  padding: 24px;
+  padding: 40px;
   text-decoration: none;
   box-sizing: border-box;
-  z-index: 1;
 }
 
 /* IMAGE */
@@ -38,7 +34,6 @@
   z-index: 0;
 }
 
-.business-cards__image picture,
 .business-cards__image img {
   width: 100%;
   height: 100%;
@@ -52,13 +47,13 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0.2)
   );
   z-index: 1;
 }
 
-/* TEXT LAYER */
+/* TEXT */
 .business-cards__title,
 .business-cards__description {
   position: relative;
@@ -68,22 +63,13 @@
 
 .business-cards__title p {
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 2.2rem;
   font-weight: 600;
+  line-height: 1.1;
 }
 
 .business-cards__description p {
-  margin-top: 8px;
-  font-size: 1rem;
+  margin-top: 12px;
+  font-size: 1.1rem;
   line-height: 1.4;
-}
-
-/* HOVER / FOCUS */
-.business-cards__link:hover::before,
-.business-cards__link:focus-visible::before {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.9),
-    rgba(0, 0, 0, 0.1)
-  );
 }
