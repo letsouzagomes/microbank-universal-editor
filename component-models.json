@@ -164,10 +164,11 @@
         "valueType": "string"
       },
       {
-        "component": "link",
+        "component": "reference",
         "name": "link",
         "label": "Link",
-        "valueType": "string"
+        "valueType": "string",
+        "multi": false
       }
     ]
   },
