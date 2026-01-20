@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p130360-e1272151.adobeaemcloud.com/bin/franklin.delivery/adobe-rnd/aem-boilerplate-xwalk/main"
+    url: "https://author-p123695-e1554523.adobeaemcloud.com/bin/franklin.delivery/letsouzagomes/microbank-universal-editor/main"
     type: "markup"
     suffix: ".html"
