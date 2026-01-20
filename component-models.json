@@ -164,11 +164,9 @@
         "valueType": "string"
       },
       {
-        "component": "reference",
+        "component": "aem-content",
         "name": "link",
-        "label": "Link",
-        "valueType": "string",
-        "multi": false
+        "label": "Link"
       }
     ]
   },
