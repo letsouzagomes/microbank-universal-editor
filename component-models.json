@@ -244,7 +244,7 @@
         "name": "cta",
         "label": "CTA Text",
         "valueType": "string",
-        "value": "IR AL CURSO"
+        "value": "Ir al curso"
       },
       {
         "component": "aem-content",
