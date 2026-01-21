@@ -1,75 +1,79 @@
-.business-cards.block > ul {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.business-cards__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-/* CARD */
-.business-cards.block > ul > li {
-  position: relative;
-  height: 520px;
-  border-radius: 24px;
-  overflow: hidden;
+.business-cards__item {
+    position: relative;
+    height: 520px;
+    border-radius: 24px;
+    overflow: hidden;
 }
 
-/* LINK ocupa tudo */
-.business-cards.block > ul > li > a.business-cards__link {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 40px;
-  text-decoration: none;
-  box-sizing: border-box;
+.business-cards__link {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-decoration: none !important;
+    color: inherit;
 }
 
 /* IMAGE */
 .business-cards__image {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
 }
 
 .business-cards__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* OVERLAY */
 .business-cards__link::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85),
-    rgba(0, 0, 0, 0.2)
-  );
-  z-index: 1;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85),
+        rgba(0, 0, 0, 0.25)
+    );
+    z-index: 1;
 }
 
-/* TEXT */
-.business-cards__title,
-.business-cards__description {
-  position: relative;
-  z-index: 2;
-  color: #ffffff;
+/* CONTENT */
+.business-cards__content {
+    position: relative;
+    z-index: 2;
+    padding: 32px;
+    color: #fff;
 }
 
 .business-cards__title p {
-  margin: 0;
-  font-size: 2.2rem;
-  font-weight: 600;
-  line-height: 1.1;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.15;
 }
 
 .business-cards__description p {
-  margin-top: 12px;
-  font-size: 1.1rem;
-  line-height: 1.4;
+    margin-top: 12px;
+    font-size: 1.05rem;
+    line-height: 1.45;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .business-cards__list {
+        grid-template-columns: 1fr;
+    }
 }
