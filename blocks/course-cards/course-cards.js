@@ -1,72 +1,72 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
+  // Create the list wrapper that will replace the block content
   const ul = document.createElement('ul');
+  ul.className = 'course-cards__list';
 
+  // Iterate over original block children (required for UE item handling)
   [...block.children].forEach((row) => {
-    const cells = [...row.children];
-    if (cells.length < 6) return;
-
-    const [
-      imageCell,
-      logoCell,
-      titleCell,
-      tagsCell,
-      ctaCell,
-      linkCell,
-    ] = cells;
-
     const li = document.createElement('li');
-    const link = document.createElement('a');
-    link.href = linkCell.textContent.trim();
+    li.className = 'course-cards__item';
 
-    /* image */
-    const media = document.createElement('div');
-    media.className = 'course-card__media';
+    // Preserve Universal Editor instrumentation
+    moveInstrumentation(row, li);
 
-    const img = imageCell.querySelector('img');
-    if (img) {
-      media.append(
-        createOptimizedPicture(img.src, img.alt || '', false, [
-          { width: '750' },
-        ]),
-      );
+    // Extract expected fields from the row structure
+    const picture = row.querySelector('picture');
+    const title = row.querySelector('h3, h4');
+    const description = row.querySelector('p');
+    const link = row.querySelector('a');
+
+    // If no link is present, the item is invalid
+    if (!link) return;
+
+    // Prepare link as the clickable card wrapper
+    link.textContent = '';
+    link.classList.remove('button');
+    link.classList.add('course-cards__link');
+    li.append(link);
+
+    // Image wrapper
+    if (picture) {
+      const imageWrapper = document.createElement('div');
+      imageWrapper.className = 'course-cards__image';
+      imageWrapper.append(picture);
+      link.append(imageWrapper);
     }
 
-    /* logo */
-    const logo = document.createElement('span');
-    logo.className = 'course-card__logo';
-    logo.textContent = logoCell.textContent.trim();
-    media.append(logo);
+    // Title
+    if (title) {
+      title.className = 'course-cards__title';
+      link.append(title);
+    }
 
-    /* content */
-    const content = document.createElement('div');
-    content.className = 'course-card__content';
+    // Description
+    if (description) {
+      description.className = 'course-cards__description';
+      link.append(description);
+    }
 
-    const title = document.createElement('h3');
-    title.textContent = titleCell.textContent.trim();
-
-    const tags = document.createElement('ul');
-    tags.className = 'course-card__tags';
-    tagsCell.textContent
-      .split(',')
-      .map((t) => t.trim())
-      .filter(Boolean)
-      .forEach((tag) => {
-        const li = document.createElement('li');
-        li.textContent = tag;
-        tags.append(li);
-      });
-
-    const cta = document.createElement('span');
-    cta.className = 'course-card__cta';
-    cta.innerHTML = `${ctaCell.textContent.trim()} <span class="arrow">→</span>`;
-
-    content.append(title, tags, cta);
-    link.append(media, content);
-    li.append(link);
     ul.append(li);
   });
 
+  // Optimize images after DOM restructuring
+  ul.querySelectorAll('picture > img').forEach((img) => {
+    const optimizedPicture = createOptimizedPicture(
+      img.src,
+      img.alt,
+      false,
+      [{ width: '800' }],
+    );
+
+    // Preserve UE instrumentation on optimized image
+    moveInstrumentation(img, optimizedPicture.querySelector('img'));
+
+    img.closest('picture').replaceWith(optimizedPicture);
+  });
+
+  // Replace original block content with final rendered structure
   block.replaceChildren(ul);
 }
