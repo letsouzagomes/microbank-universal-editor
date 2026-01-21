@@ -2,46 +2,45 @@
   "definitions": [
     {
       "id": "clickable-cards",
+      "title": "Clickable Cards",
       "fields": [
         {
           "component": "text",
           "name": "classes",
-          "label": "Block Classes",
-          "valueType": "string",
-          "description": "Classes CSS adicionais (ex: dark-mode, large-gap)"
+          "label": "Estilos CSS",
+          "description": "Classes opcionais (ex: dark-mode)",
+          "valueType": "string"
         },
         {
           "component": "multifield",
           "name": "items",
-          "label": "Cards Items",
-          "description": "Adicione os cards aqui",
-          "multi": true,
+          "label": "Lista de Cards",
+          "description": "Adicione cards à lista",
           "fields": [
             {
               "component": "image",
               "name": "image",
-              "label": "Image",
+              "label": "Imagem",
               "valueType": "string",
               "mimeType": "image/*"
             },
             {
               "component": "text",
               "name": "title",
-              "label": "Title",
+              "label": "Título",
               "valueType": "string"
             },
             {
               "component": "richtext",
               "name": "description",
-              "label": "Description",
+              "label": "Descrição",
               "valueType": "string"
             },
             {
               "component": "text",
               "name": "link",
-              "label": "Link URL",
-              "valueType": "string",
-              "description": "URL de destino do card"
+              "label": "Link de Destino",
+              "valueType": "string"
             }
           ]
         }
