@@ -2,53 +2,56 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
+  // Create list wrapper
   const ul = document.createElement('ul');
 
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
+
+    // Preserve Universal Editor instrumentation for the item
     moveInstrumentation(row, li);
 
-    const picture = row.querySelector('picture');
-    const title = row.querySelector('div:nth-of-type(2)');
-    const description = row.querySelector('div:nth-of-type(3)');
-    const link = row.querySelector('a');
-
-    if (!link) return;
-    link.textContent = '';
-    link.classList.remove('button');
-    link.classList.add('business-cards__link');
-    li.append(link);
-
-    if (picture) {
-      const imgWrap = document.createElement('div');
-      imgWrap.className = 'business-cards__image';
-      imgWrap.append(picture);
-      link.append(imgWrap);
+    // Move original DOM nodes instead of recreating them
+    while (row.firstElementChild) {
+      li.append(row.firstElementChild);
     }
 
-    if (title) {
-      title.className = 'business-cards__title';
-      link.append(title);
+    // Ensure the link is the main clickable wrapper
+    const link = li.querySelector('a');
+    if (link) {
+      link.classList.remove('button');
+      link.classList.add('business-cards__link');
     }
 
-    if (description) {
-      description.className = 'business-cards__description';
-      link.append(description);
-    }
+    // Assign structural classes expected by CSS
+    [...li.children].forEach((child) => {
+      // Image container
+      if (child.querySelector('picture')) {
+        child.classList.add('business-cards__image');
+      }
+
+      // Title container
+      if (child.querySelector('p') && !child.querySelector('picture')) {
+        child.classList.add('business-cards__title');
+      }
+    });
 
     ul.append(li);
   });
 
+  // Optimize images while preserving instrumentation
   ul.querySelectorAll('picture > img').forEach((img) => {
-    const optimized = createOptimizedPicture(
+    const optimizedPicture = createOptimizedPicture(
       img.src,
       img.alt,
       false,
       [{ width: '800' }],
     );
-    moveInstrumentation(img, optimized.querySelector('img'));
-    img.closest('picture').replaceWith(optimized);
+
+    moveInstrumentation(img, optimizedPicture.querySelector('img'));
+    img.closest('picture').replaceWith(optimizedPicture);
   });
 
+  // Replace block content with final structure
   block.replaceChildren(ul);
 }
