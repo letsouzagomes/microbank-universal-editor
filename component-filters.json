@@ -47,5 +47,11 @@
       "button",
       "title"
     ]
+  },
+  {
+    "id": "course-cards",
+    "components": [
+      "course-card"
+    ]
   }
 ]

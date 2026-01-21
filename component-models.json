@@ -209,37 +209,42 @@
     ]
   },
   {
-    "id": "course-cards",
+    "id": "course-card",
     "fields": [
       {
-        "component": "image",
+        "component": "reference",
         "name": "image",
         "label": "Background Image",
-        "valueType": "string"
+        "valueType": "string",
+        "multi": false
       },
       {
         "component": "text",
-        "name": "logo",
-        "label": "Logo / Partner Name",
-        "valueType": "string"
+        "name": "partner",
+        "label": "Partner / Logo Text",
+        "valueType": "string",
+        "value": ""
       },
       {
         "component": "text",
         "name": "title",
         "label": "Title",
-        "valueType": "string"
+        "valueType": "string",
+        "value": ""
       },
       {
         "component": "text",
         "name": "tags",
         "label": "Tags (comma separated)",
-        "valueType": "string"
+        "valueType": "string",
+        "value": ""
       },
       {
         "component": "text",
         "name": "cta",
         "label": "CTA Text",
-        "valueType": "string"
+        "valueType": "string",
+        "value": "IR AL CURSO"
       },
       {
         "component": "aem-content",
