@@ -1,20 +1,130 @@
-footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+/* =========================================================
+   FOOTER RESET
+   ========================================================= */
+
+footer.footer-wrapper {
+    background-color: #fff;
+    color: #000;
+    padding: 64px 24px 32px;
+    font-family: var(--body-font-family);
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer.footer-wrapper * {
+    color: inherit;
 }
 
-footer .footer p {
-  margin: 0;
+/* =========================================================
+   FOOTER BASE
+   ========================================================= */
+
+/* remove qualquer herança de layout do header */
+footer.footer-wrapper .nav-wrapper {
+    all: unset;
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
-  }
+/* =========================================================
+   FOOTER INNER
+   ========================================================= */
+
+footer.footer-wrapper .footer {
+    max-width: 1248px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+/* =========================================================
+   COLUMNS BLOCK
+   ========================================================= */
+
+footer.footer-wrapper .columns-wrapper .columns > div {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+/* LOGO */
+footer.footer-wrapper .columns-img-col img {
+    max-width: 180px;
+    height: auto;
+}
+
+/* =========================================================
+   TITLES
+   ========================================================= */
+
+footer.footer-wrapper h3 {
+    margin: 0 0 16px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #222;
+    font-family: "OpenSans-Bold", Arial, serif;
+    font-size: 14px;
+}
+
+/* =========================================================
+   LISTS
+   ========================================================= */
+
+footer.footer-wrapper ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer.footer-wrapper li a {    
+    text-decoration: none;
+    color: #757170;
+    font-family: "OpenSans", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 19px;
+}
+
+footer.footer-wrapper li a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* =========================================================
+   LEGAL LINKS
+   ========================================================= */
+
+footer.footer-wrapper .section:nth-of-type(2) ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    font-size: 0.85rem;
+}
+
+footer.footer-wrapper .section:nth-of-type(2) li {
+    margin: 0;
+}
+
+/* =========================================================
+   COPYRIGHT
+   ========================================================= */
+
+footer.footer-wrapper .section:nth-of-type(3) {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 16px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+    footer.footer-wrapper {
+        padding: 48px 16px 24px;
+    }
+
+    footer.footer-wrapper .columns-wrapper .columns > div {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
 }
