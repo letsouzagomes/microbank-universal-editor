@@ -1,0 +1,55 @@
+/* ===============================
+   TITLE LINK
+================================ */
+
+.title-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.title-link h1,
+.title-link h2,
+.title-link h3,
+.title-link h4,
+.title-link h5,
+.title-link h6 {
+    margin: 0;
+    font-family: ZillaSlab-MediumItalic, Helvetica, Arial, sans-serif;
+    font-size: 48px;
+    line-height: 1.2;
+    color: #000;
+}
+
+.title-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: OpenSans-Semibold, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    color: #000;
+    white-space: nowrap;
+}
+
+.title-link a::after {
+    content: "→";
+    transition: transform 0.3s ease;
+}
+
+.title-link a:hover::after {
+    transform: translateX(4px);
+}
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 768px) {
+    .title-link {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
