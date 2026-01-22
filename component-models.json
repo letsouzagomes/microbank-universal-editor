@@ -351,15 +351,15 @@
         "value": "h2"
       },
       {
-        "component": "text",
-        "name": "linkText",
-        "label": "Link Text",
-        "valueType": "string"
-      },
-      {
         "component": "aem-content",
         "name": "linkUrl",
         "label": "Link URL",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Link Text",
         "valueType": "string"
       }
     ]
