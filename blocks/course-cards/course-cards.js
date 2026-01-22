@@ -18,7 +18,7 @@ export default function decorate(block) {
     }
 
     /* ----------------------------
-      Promote link to card
+       Promote link to card
     ----------------------------- */
     const link = li.querySelector('a');
     if (link) {
@@ -27,36 +27,42 @@ export default function decorate(block) {
     }
 
     /* ----------------------------
-      Tags
+       TAGS (IDEMPOTENT)
     ----------------------------- */
     const tagsContainer = li.querySelector('div:last-child');
-    const tagParagraphs = [...tagsContainer.querySelectorAll('p:nth-child(n+3)')];
+    if (tagsContainer && !tagsContainer.querySelector('.course-card__tags')) {
+      const tagParagraphs = [...tagsContainer.querySelectorAll('p:nth-child(n+3)')];
 
-    if (tagParagraphs.length) {
-      const tagsList = document.createElement('ul');
-      tagsList.className = 'course-card__tags';
+      if (tagParagraphs.length) {
+        const tagsList = document.createElement('ul');
+        tagsList.className = 'course-card__tags';
 
-      tagParagraphs.forEach((p) => {
-        const tag = p.textContent.trim();
-        if (!tag) return;
+        tagParagraphs.forEach((p) => {
+          const tag = p.textContent.trim();
+          if (!tag) return;
 
-        const liTag = document.createElement('li');
-        liTag.textContent = tag.toUpperCase();
-        tagsList.append(liTag);
-      });
+          const liTag = document.createElement('li');
+          liTag.textContent = tag.toUpperCase();
+          tagsList.append(liTag);
+        });
 
-      moveInstrumentation(tagParagraphs[0], tagsList);
-      tagParagraphs.forEach((p) => p.remove());
-      tagsContainer.append(tagsList);
+        if (tagsList.children.length) {
+          moveInstrumentation(tagParagraphs[0], tagsList);
+          tagParagraphs.forEach((p) => p.remove());
+          tagsContainer.append(tagsList);
+        }
+      }
     }
 
     ul.append(li);
   });
 
   /* ----------------------------
-    Optimize images
+     Optimize images (IDEMPOTENT)
   ----------------------------- */
   ul.querySelectorAll('picture > img').forEach((img) => {
+    if (img.closest('picture').dataset.optimized) return;
+
     const optimized = createOptimizedPicture(
       img.src,
       img.alt,
@@ -64,17 +70,19 @@ export default function decorate(block) {
       [{ width: '800' }],
     );
 
+    optimized.dataset.optimized = 'true';
     moveInstrumentation(img, optimized.querySelector('img'));
     img.closest('picture').replaceWith(optimized);
   });
 
   /* ----------------------------
-    Make card clickable (UE-safe)
+     Make card clickable (SAFE)
   ----------------------------- */
   ul.querySelectorAll('.course-cards__item').forEach((card) => {
     const { href } = card.dataset;
-    if (!href) return;
+    if (!href || card.dataset.clickBound) return;
 
+    card.dataset.clickBound = 'true';
     card.setAttribute('role', 'link');
     card.setAttribute('tabindex', '0');
 
