@@ -1,22 +1,51 @@
 /* ===============================
-   TITLE WITH LINK
+   TITLE LINK – RESET BUTTON
 ================================ */
-.title-with-link {
+.title-link a.button {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: OpenSans, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Arrow */
+.title-link a.button::after {
+    content: "→";
+    font-size: 20px;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+.title-link a.button:hover::after {
+    transform: translateX(4px);
+}
+
+/* ===============================
+   TITLE LINK LAYOUT
+================================ */
+.title-link {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
+    margin-bottom: 36px;
 }
 
 /* ===============================
    TITLE
 ================================ */
-.title-with-link h1,
-.title-with-link h2,
-.title-with-link h3,
-.title-with-link h4,
-.title-with-link h5,
-.title-with-link h6 {
+.title-link h1,
+.title-link h2,
+.title-link h3,
+.title-link h4,
+.title-link h5,
+.title-link h6 {
     margin: 0;
     font-family: ZillaSlab-MediumItalic, Helvetica, Arial, sans-serif;
     font-weight: 300;
@@ -26,30 +55,32 @@
 }
 
 /* ===============================
-   LINK / CTA
+   TITLE LINK – CTA (TEXTUAL)
 ================================ */
-.title-with-link a {
+.title-link a.button {
+    all: unset;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-family: OpenSans-Semibold, Helvetica, Arial, sans-serif;
+    gap: 10px;
+    font-family: OpenSans, Helvetica, Arial, sans-serif;
     font-size: 16px;
     font-weight: 400;
+    line-height: 1.25;
     color: #000;
-    text-decoration: none;
+    cursor: pointer;
     white-space: nowrap;
 }
 
 /* Arrow */
-.title-with-link a::after {
+.title-link a.button::after {
     content: "→";
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1;
+    margin-top: 1px; /* 🔧 ajuste fino de baseline */
     transition: transform 0.3s ease;
 }
 
-/* Hover */
-.title-with-link a:hover::after {
+.title-link a.button:hover::after {
     transform: translateX(4px);
 }
 
@@ -57,18 +88,18 @@
    MOBILE
 ================================ */
 @media (max-width: 768px) {
-    .title-with-link {
+    .title-link {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
     }
 
-    .title-with-link h1,
-    .title-with-link h2,
-    .title-with-link h3,
-    .title-with-link h4,
-    .title-with-link h5,
-    .title-with-link h6 {
+    .title-link h1,
+    .title-link h2,
+    .title-link h3,
+    .title-link h4,
+    .title-link h5,
+    .title-link h6 {
         font-size: 32px;
         line-height: 1.25;
     }

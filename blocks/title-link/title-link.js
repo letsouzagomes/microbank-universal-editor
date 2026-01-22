@@ -4,21 +4,18 @@ export default function decorate(block) {
 
   const title = block.querySelector('h1,h2,h3,h4,h5,h6');
   const link = block.querySelector('a');
-  const text = block.querySelector('div:last-child p');
+  const textDiv = block.querySelector(':scope > div:last-child > div');
 
-  if (!title || !link || !text) return;
+  if (!title || !link || !textDiv) return;
 
-  const label = text.textContent.trim();
-  const href = link.getAttribute('href');
+  const label = textDiv.textContent.trim();
 
-  // Only render link if both fields exist
-  if (!label || !href || href === '#') {
-    link.closest('div').remove();
-    text.closest('div').remove();
+  if (!label) {
+    block.replaceChildren(title);
     return;
   }
 
-  // Set link label
+  // Set link text
   link.textContent = label;
 
   // Normalize DOM: title + link only
