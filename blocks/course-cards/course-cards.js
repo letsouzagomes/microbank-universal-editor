@@ -1,6 +1,24 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+function buildTagsList(rawText) {
+  const tags = (rawText || '')
+    .split(',')
+    .map((t) => t.trim())
+    .filter(Boolean);
+
+  const list = document.createElement('ul');
+  list.className = 'course-card__tags';
+
+  tags.forEach((tag) => {
+    const item = document.createElement('li');
+    item.textContent = tag.toUpperCase();
+    list.append(item);
+  });
+
+  return list;
+}
+
 export default function decorate(block) {
   const ul = document.createElement('ul');
   ul.className = 'course-cards__list';
@@ -27,29 +45,20 @@ export default function decorate(block) {
     }
 
     /* ----------------------------
-       TAGS (IDEMPOTENT)
+       Tags (structure: li > div:nth-child(3))
+       Idempotent: do nothing if already converted
     ----------------------------- */
-    const tagsContainer = li.querySelector('div:last-child');
-    if (tagsContainer && !tagsContainer.querySelector('.course-card__tags')) {
-      const tagParagraphs = [...tagsContainer.querySelectorAll('p:nth-child(n+3)')];
+    const tagsDiv = li.querySelector(':scope > div:nth-child(3)');
+    if (tagsDiv) {
+      const alreadyConverted = tagsDiv.tagName === 'UL'
+        || tagsDiv.classList.contains('course-card__tags')
+        || li.querySelector(':scope > ul.course-card__tags');
 
-      if (tagParagraphs.length) {
-        const tagsList = document.createElement('ul');
-        tagsList.className = 'course-card__tags';
-
-        tagParagraphs.forEach((p) => {
-          const tag = p.textContent.trim();
-          if (!tag) return;
-
-          const liTag = document.createElement('li');
-          liTag.textContent = tag.toUpperCase();
-          tagsList.append(liTag);
-        });
-
+      if (!alreadyConverted) {
+        const tagsList = buildTagsList(tagsDiv.textContent);
         if (tagsList.children.length) {
-          moveInstrumentation(tagParagraphs[0], tagsList);
-          tagParagraphs.forEach((p) => p.remove());
-          tagsContainer.append(tagsList);
+          moveInstrumentation(tagsDiv, tagsList);
+          tagsDiv.replaceWith(tagsList);
         }
       }
     }
@@ -58,10 +67,11 @@ export default function decorate(block) {
   });
 
   /* ----------------------------
-     Optimize images (IDEMPOTENT)
+     Optimize images (idempotent)
   ----------------------------- */
   ul.querySelectorAll('picture > img').forEach((img) => {
-    if (img.closest('picture').dataset.optimized) return;
+    const picture = img.closest('picture');
+    if (!picture || picture.dataset.optimized === 'true') return;
 
     const optimized = createOptimizedPicture(
       img.src,
@@ -70,17 +80,19 @@ export default function decorate(block) {
       [{ width: '800' }],
     );
 
+    const optimizedImg = optimized.querySelector('img');
+    if (optimizedImg) moveInstrumentation(img, optimizedImg);
+
     optimized.dataset.optimized = 'true';
-    moveInstrumentation(img, optimized.querySelector('img'));
-    img.closest('picture').replaceWith(optimized);
+    picture.replaceWith(optimized);
   });
 
   /* ----------------------------
-     Make card clickable (SAFE)
+     Make card clickable (UE-safe, avoid double-binding)
   ----------------------------- */
   ul.querySelectorAll('.course-cards__item').forEach((card) => {
     const { href } = card.dataset;
-    if (!href || card.dataset.clickBound) return;
+    if (!href || card.dataset.clickBound === 'true') return;
 
     card.dataset.clickBound = 'true';
     card.setAttribute('role', 'link');

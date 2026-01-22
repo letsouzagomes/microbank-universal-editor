@@ -15,10 +15,17 @@
 ================================ */
 .course-cards__item {
     position: relative;
-    aspect-ratio: 312 / 456;
+    aspect-ratio: 312/456;
     border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
+}
+
+/* ===============================
+   RESET
+================================ */
+.course-cards__item p {
+    margin: 0;
 }
 
 /* ===============================
@@ -28,17 +35,15 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    margin: 0;
-    padding: 0;
 }
 
 .course-cards__item img {
     width: 100%;
     height: 110%;
     object-fit: cover;
-    transition: transform 0.5s ease;
     object-position: top center;
     display: block;
+    transition: transform 0.5s ease;
 }
 
 /* ===============================
@@ -62,7 +67,7 @@
 /* ===============================
    PARTNER / LOGO
 ================================ */
-.course-cards__item > div:last-child p:first-child {
+.course-cards__item > div:nth-of-type(2) p:first-child {
     position: absolute;
     top: 16px;
     left: 16px;
@@ -78,13 +83,12 @@
 /* ===============================
    TITLE
 ================================ */
-.course-cards__item > div:last-child p:nth-child(2) {
+.course-cards__item > div:nth-of-type(2) p:nth-child(2) {
     position: absolute;
     left: 20px;
     right: 20px;
     bottom: 96px;
     z-index: 2;
-    margin: 0;
     font-family: ZillaSlab-MediumItalic, Helvetica, Arial, sans-serif;
     font-weight: 300;
     font-size: 26px;
@@ -93,9 +97,9 @@
 }
 
 /* ===============================
-   TAGS (PILLS)
+   TAGS
 ================================ */
-.course-card__tags {
+.course-cards__item > ul.course-card__tags {
     position: absolute;
     left: 20px;
     right: 20px;
@@ -108,7 +112,7 @@
     list-style: none;
 }
 
-.course-card__tags li {
+.course-cards__item > ul.course-card__tags li {
     background: #007caf;
     color: #fff;
     padding: 6px 12px;
