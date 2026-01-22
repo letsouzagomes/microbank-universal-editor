@@ -1,98 +1,181 @@
-.course-cards > ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 32px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* ===============================
+   GRID
+================================ */
+
+.course-cards__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.course-cards li {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  border-radius: 20px;
-  overflow: hidden;
+/* ===============================
+   CARD BASE
+================================ */
+
+.course-cards__item {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
 }
 
-.course-cards a {
-  display: block;
-  height: 100%;
-  color: #fff;
-  text-decoration: none;
+/* ===============================
+   IMAGE
+================================ */
+
+.course-cards__item > div:first-child p:first-child {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
 }
 
-.course-card__media {
-  position: absolute;
-  inset: 0;
+.course-cards__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.course-card__media picture,
-.course-card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* ===============================
+   GRADIENT
+================================ */
+
+.course-cards__item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.25)
+    );
 }
 
-.course-card__media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.9),
-    rgba(0, 0, 0, 0.2)
-  );
+/* ===============================
+   PARTNER / LOGO
+================================ */
+
+.course-cards__item > div:last-child p:first-child {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 2;
+    background: #fff;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
-.course-card__logo {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: #fff;
-  color: #000;
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 12px;
-  z-index: 1;
+/* ===============================
+   TITLE
+================================ */
+
+.course-cards__item > div:last-child p:nth-child(2) {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 96px;
+    z-index: 2;
+    margin: 0;
+    font-family: ZillaSlab-MediumItalic, Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 34px;
+    color: #fff;
 }
 
-.course-card__content {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  z-index: 1;
-}
-
-.course-card__content h3 {
-  margin: 0 0 12px;
-  font-size: 1.4rem;
-  line-height: 1.2;
-}
+/* ===============================
+   TAGS (PILLS)
+================================ */
 
 .course-card__tags {
-  display: flex;
-  gap: 8px;
-  list-style: none;
-  padding: 0;
-  margin: 0 0 16px;
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 56px;
+    z-index: 2;
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .course-card__tags li {
-  background: #0aa0d6;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
+    background: #007CAF;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: OpenSans-Semibold, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    text-transform: uppercase;
 }
 
-.course-card__cta {
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+/* ===============================
+   CTA
+================================ */
+
+.course-cards__item > div:first-child p:nth-child(3) {
+    position: absolute;
+    left: 20px;
+    bottom: 24px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "OpenSans-Bold", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: normal;
+    text-transform: uppercase;
+    color: #fff;
 }
 
-.course-card__cta .arrow {
-  font-size: 1.2em;
+.course-cards__item > div:first-child p:nth-child(3)::after {
+    content: "→";
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.course-cards__item:hover > div:first-child p:nth-child(3)::after {
+    transform: translateX(4px);
+}
+
+/* ===============================
+   HIDE LINK (DATA ONLY)
+================================ */
+
+.course-cards__item > div:first-child p:nth-child(2) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+/* ===============================
+   HOVER
+================================ */
+
+.course-cards__item:hover img {
+    transform: scale(1.05);
+}
+
+/* ===============================
+   ACCESSIBILITY
+================================ */
+
+.course-cards__item:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
 }
