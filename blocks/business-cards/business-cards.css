@@ -1,5 +1,7 @@
+/* stylelint-disable selector-class-pattern */
+
 /* ===============================
-   GRID
+    GRID
 ================================ */
 
 .business-cards ul {
@@ -80,25 +82,26 @@
 .business-cards__item > div:nth-child(2),
 .business-cards__item > div:nth-child(3) {
     position: absolute;
-    left: 32px;
-    right: 32px;
     z-index: 2;
     text-align: center;
 }
 
 .business-cards__item > div:nth-child(2) {
-    bottom: 104px;
+    bottom: 120px;
+    left: 40px;
+    right: 40px;
 }
 
 .business-cards__item > div:nth-child(3) {
     bottom: 56px;
+    left: 32px;
+    right: 32px;
 }
 
 .business-cards__item p {
-    margin: 0;
-    text-align: left;
     color: #fff;
     text-align: center;
+    margin: 0 0 1.2rem;
 }
 
 /* Title */
@@ -107,7 +110,6 @@
     font-size: 45px;
     line-height: 1;
     font-weight: 400;
-    margin: 0 0 1.7rem;
     max-width: 40rem;
 }
 
@@ -118,7 +120,6 @@
     line-height: 1.4;
     font-weight: 400;
     opacity: 0.95;
-    margin: 0 0 1.2rem;
 }
 
 /* ===============================
@@ -173,7 +174,7 @@
 ================================ */
 
 .business-cards__item:focus-visible {
-    outline: 3px solid #ffffff;
+    outline: 3px solid #fff;
     outline-offset: 4px;
 }
 
