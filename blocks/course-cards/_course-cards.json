@@ -37,43 +37,43 @@
       "fields": [
         {
           "component": "reference",
-          "name": "image",
+          "name": "card_image",
           "label": "Background Image",
           "valueType": "string",
           "multi": false
         },
         {
+          "component": "aem-content",
+          "name": "card_link",
+          "label": "Link"
+        },
+        {
           "component": "text",
-          "name": "partner",
+          "name": "card_linkCta",
+          "label": "CTA Text",
+          "valueType": "string",
+          "value": "Ir al curso"
+        },
+        {
+          "component": "text",
+          "name": "content_partner",
           "label": "Partner / Logo Text",
           "valueType": "string",
           "value": ""
         },
         {
           "component": "text",
-          "name": "title",
+          "name": "content_title",
           "label": "Title",
           "valueType": "string",
           "value": ""
         },
         {
           "component": "text",
-          "name": "tags",
+          "name": "content_tags",
           "label": "Tags (comma separated)",
           "valueType": "string",
           "value": ""
-        },
-        {
-          "component": "text",
-          "name": "cta",
-          "label": "CTA Text",
-          "valueType": "string",
-          "value": "Ir al curso"
-        },
-        {
-          "component": "aem-content",
-          "name": "link",
-          "label": "Link"
         }
       ]
     }
