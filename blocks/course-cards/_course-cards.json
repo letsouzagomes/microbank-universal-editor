@@ -71,7 +71,8 @@
         {
           "component": "text",
           "name": "content_tags",
-          "label": "Tags (comma separated)",
+          "label": "Tags",
+          "multi": true,
           "valueType": "string",
           "value": ""
         }

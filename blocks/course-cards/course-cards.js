@@ -18,7 +18,7 @@ export default function decorate(block) {
     }
 
     /* ----------------------------
-       Promote link to card
+      Promote link to card
     ----------------------------- */
     const link = li.querySelector('a');
     if (link) {
@@ -27,39 +27,34 @@ export default function decorate(block) {
     }
 
     /* ----------------------------
-       Split comma-separated tags
-       (div:last-child p:nth-child(3))
+      Tags
     ----------------------------- */
-    const tagsParagraph = li.querySelector(
-      'div:last-child p:nth-child(3)',
-    );
+    const tagsContainer = li.querySelector('div:last-child');
+    const tagParagraphs = [...tagsContainer.querySelectorAll('p:nth-child(n+3)')];
 
-    if (tagsParagraph) {
-      const tags = tagsParagraph.textContent
-        .split(',')
-        .map((tag) => tag.trim())
-        .filter(Boolean);
+    if (tagParagraphs.length) {
+      const tagsList = document.createElement('ul');
+      tagsList.className = 'course-card__tags';
 
-      if (tags.length) {
-        const tagsList = document.createElement('ul');
-        tagsList.className = 'course-card__tags';
+      tagParagraphs.forEach((p) => {
+        const tag = p.textContent.trim();
+        if (!tag) return;
 
-        tags.forEach((tag) => {
-          const tagItem = document.createElement('li');
-          tagItem.textContent = tag.toUpperCase();
-          tagsList.append(tagItem);
-        });
+        const liTag = document.createElement('li');
+        liTag.textContent = tag.toUpperCase();
+        tagsList.append(liTag);
+      });
 
-        moveInstrumentation(tagsParagraph, tagsList);
-        tagsParagraph.replaceWith(tagsList);
-      }
+      moveInstrumentation(tagParagraphs[0], tagsList);
+      tagParagraphs.forEach((p) => p.remove());
+      tagsContainer.append(tagsList);
     }
 
     ul.append(li);
   });
 
   /* ----------------------------
-     Optimize images
+    Optimize images
   ----------------------------- */
   ul.querySelectorAll('picture > img').forEach((img) => {
     const optimized = createOptimizedPicture(
@@ -74,7 +69,7 @@ export default function decorate(block) {
   });
 
   /* ----------------------------
-     Make card clickable (UE-safe)
+    Make card clickable (UE-safe)
   ----------------------------- */
   ul.querySelectorAll('.course-cards__item').forEach((card) => {
     const { href } = card.dataset;
