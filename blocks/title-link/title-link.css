@@ -1,55 +1,75 @@
 /* ===============================
-   TITLE LINK
+   TITLE WITH LINK
 ================================ */
-
-.title-link {
+.title-with-link {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
 }
 
-.title-link h1,
-.title-link h2,
-.title-link h3,
-.title-link h4,
-.title-link h5,
-.title-link h6 {
+/* ===============================
+   TITLE
+================================ */
+.title-with-link h1,
+.title-with-link h2,
+.title-with-link h3,
+.title-with-link h4,
+.title-with-link h5,
+.title-with-link h6 {
     margin: 0;
     font-family: ZillaSlab-MediumItalic, Helvetica, Arial, sans-serif;
+    font-weight: 300;
     font-size: 48px;
     line-height: 1.2;
     color: #000;
 }
 
-.title-link a {
+/* ===============================
+   LINK / CTA
+================================ */
+.title-with-link a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-family: OpenSans-Semibold, Helvetica, Arial, sans-serif;
     font-size: 16px;
-    text-decoration: none;
+    font-weight: 400;
     color: #000;
+    text-decoration: none;
     white-space: nowrap;
 }
 
-.title-link a::after {
+/* Arrow */
+.title-with-link a::after {
     content: "→";
+    font-size: 18px;
+    line-height: 1;
     transition: transform 0.3s ease;
 }
 
-.title-link a:hover::after {
+/* Hover */
+.title-with-link a:hover::after {
     transform: translateX(4px);
 }
 
 /* ===============================
    MOBILE
 ================================ */
-
 @media (max-width: 768px) {
-    .title-link {
+    .title-with-link {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
+    }
+
+    .title-with-link h1,
+    .title-with-link h2,
+    .title-with-link h3,
+    .title-with-link h4,
+    .title-with-link h5,
+    .title-with-link h6 {
+        font-size: 32px;
+        line-height: 1.25;
     }
 }
