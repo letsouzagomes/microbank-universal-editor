@@ -20,6 +20,9 @@ function buildTagsList(rawText) {
 }
 
 export default function decorate(block) {
+  if (block.dataset.decorated === 'true') return;
+  block.dataset.decorated = 'true';
+
   const ul = document.createElement('ul');
   ul.className = 'course-cards__list';
 
