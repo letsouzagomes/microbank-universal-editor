@@ -357,7 +357,7 @@
         "valueType": "string"
       },
       {
-        "component": "reference",
+        "component": "aem-content",
         "name": "linkUrl",
         "label": "Link URL",
         "valueType": "string"
